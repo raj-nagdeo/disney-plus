@@ -11,7 +11,13 @@ function Detail() {
     const [movie,setMovie]=useState("")
 
      useEffect( ()=>{
-       //
+        getDoc(doc(db, "movies", id)).then(docSnap => {
+            if (docSnap.exists()) {
+                setMovie(docSnap.data());
+            } else {
+              console.log("No such document!");
+            }
+          })
     },[])
 
   console.log("Movie is ",movie);
